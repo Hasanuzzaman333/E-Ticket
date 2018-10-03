@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color:#F3FAB6;
+        }
+        
+        .navbar{
+            background-color:#CBE32D;
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+        <h3>Website Header</h3>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/Home/Index">Home</a></li>
+                        @{if (Session["pid"] == null) {
+                        <li><a href="/Signin/Index">Sign In</a></li>
+                        <li><a href="/Signup/Index">Sign Up</a></li>
+                            }
+                            else
+                            {
+                                if (Convert.ToInt32(Session["ptype"]) == 2) {
+                                    <li><a href="/Profile/AdminProfile">@Session["name"]</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Profile/UserProfile">@Session["name"]</a></li>
+
+                                }
+                                <li><a href="/Signin/Logout">Log out</a></li>
+                            }
+                        }
+                        <li><a href="/AdminViewReserves/Index">Contact</a></li>
+
+                    </ul>
+                    @{if (Convert.ToInt32(Session["ptype"]) == 2) {
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="/buses/Index">Buses</a></li>
+                        <li><a href="/Route/Index">Routes</a></li>
+                        <li><a href="/Schedule/Index">Schedule</a></li>
+                        <li><a href="/Reserve/Index">Reserves</a></li>
+                    </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </nav>
+
+        
+        <!--div class="alert alert-success alert-dismissible text-center">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Indicates a successful or positive action.
+        </div-->
+
+
+    </div>
+    <div class="body1">
+        <table border="0" style="width:100%; font-family:Arial">
+            <tr>
+                <td style="width:10%;">
+                
+                </td>
+                <td style="width:80%;">
+                    @RenderBody()
+                </td>
+                <td style="width:10%;">
+                
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:center; font-size:x-small; background-color:#F3FAB6">
+                    <h3>Website Footer</h3>
+                </td>
+            </tr>
+        </table>
+    </div>
+  
+</body>
+</html>
+

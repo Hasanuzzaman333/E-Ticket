@@ -1,0 +1,78 @@
+﻿@model IEnumerable<E_tickets.Models.ReserveM>
+
+@{
+    ViewBag.Title = "Reserved Tickets";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Reserved Tickets</h2>
+
+<!--p>
+    Html.ActionLink("Create New", "Create")
+</p-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ticket_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.routeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.scheduleId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seat_no)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.routeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.scheduleId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seat_no)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ticket_no  }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ticket_no }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ticket_no }) |
+            @Html.ActionLink("Download", "PrintTickets", new { id = item.ticket_no })
+            @*@<a href="@Url.Action("PrintTickets")">Download</a>*@
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,83 @@
+﻿@model E_tickets.Models.ReserveM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ReserveM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.routeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.routeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scheduleId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scheduleId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seat_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seat_no)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

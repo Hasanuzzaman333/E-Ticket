@@ -1,0 +1,64 @@
+﻿@model IEnumerable<E_tickets.Models.RbScheduleM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fare)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departure_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departure_time)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fare)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departure_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departure_time)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.sid  }) |
+            @Html.ActionLink("Details", "Details", new { id=item.sid  }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.sid })
+        </td>
+    </tr>
+}
+
+</table>

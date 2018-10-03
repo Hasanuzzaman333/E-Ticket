@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BusModelStoreContainer" CdmEntityContainer="ReserveM1">
+    <EntitySetMapping Name="reserves">
+      <EntityTypeMapping TypeName="BusModel.reserve">
+        <MappingFragment StoreEntitySet="reserves">
+          <ScalarProperty Name="ticket_no" ColumnName="ticket_no" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="seat_no" ColumnName="seat_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BusdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bus">
+          <Key>
+            <PropertyRef Name="bid" />
+          </Key>
+          <Property Name="bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bname" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="max_seats" Type="int" Nullable="false" />
+          <Property Name="btype" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="passenger">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="phone_no" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="ptype" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rbschedule">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rid" Type="int" Nullable="false" />
+          <Property Name="bid" Type="int" Nullable="false" />
+          <Property Name="fare" Type="int" Nullable="false" />
+          <Property Name="departure_date" Type="date" Nullable="false" />
+          <Property Name="departure_time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reserves">
+          <Key>
+            <PropertyRef Name="ticket_no" />
+          </Key>
+          <Property Name="ticket_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rid" Type="int" Nullable="false" />
+          <Property Name="pid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_no" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sid" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="seat_no" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="route">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="from_location" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="to_location" Type="char" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_rbschedule_bus">
+          <End Role="bus" Type="Self.bus" Multiplicity="1" />
+          <End Role="rbschedule" Type="Self.rbschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bus">
+              <PropertyRef Name="bid" />
+            </Principal>
+            <Dependent Role="rbschedule">
+              <PropertyRef Name="bid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rbschedule_route">
+          <End Role="route" Type="Self.route" Multiplicity="1" />
+          <End Role="rbschedule" Type="Self.rbschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="rbschedule">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_passenger">
+          <End Role="passenger" Type="Self.passenger" Multiplicity="1" />
+          <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="passenger">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="reserves">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_rbschedule">
+          <End Role="rbschedule" Type="Self.rbschedule" Multiplicity="1" />
+          <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rbschedule">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="reserves">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_reserves">
+          <End Role="reserves" Type="Self.reserves" Multiplicity="1" />
+          <End Role="reserves1" Type="Self.reserves" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="reserves">
+              <PropertyRef Name="ticket_no" />
+            </Principal>
+            <Dependent Role="reserves1">
+              <PropertyRef Name="ticket_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_route">
+          <End Role="route" Type="Self.route" Multiplicity="1" />
+          <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="reserves">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BusdbModelStoreContainer">
+          <EntitySet Name="bus" EntityType="Self.bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="passenger" EntityType="Self.passenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rbschedule" EntityType="Self.rbschedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reserves" EntityType="Self.reserves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="route" EntityType="Self.route" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_rbschedule_bus" Association="Self.FK_rbschedule_bus">
+            <End Role="bus" EntitySet="bus" />
+            <End Role="rbschedule" EntitySet="rbschedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rbschedule_route" Association="Self.FK_rbschedule_route">
+            <End Role="route" EntitySet="route" />
+            <End Role="rbschedule" EntitySet="rbschedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_passenger" Association="Self.FK_reserves_passenger">
+            <End Role="passenger" EntitySet="passenger" />
+            <End Role="reserves" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_rbschedule" Association="Self.FK_reserves_rbschedule">
+            <End Role="rbschedule" EntitySet="rbschedule" />
+            <End Role="reserves" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_reserves" Association="Self.FK_reserves_reserves">
+            <End Role="reserves" EntitySet="reserves" />
+            <End Role="reserves1" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_route" Association="Self.FK_reserves_route">
+            <End Role="route" EntitySet="route" />
+            <End Role="reserves" EntitySet="reserves" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BusdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="buses" EntityType="BusdbModel.bus" />
+          <EntitySet Name="passengers" EntityType="BusdbModel.passenger" />
+          <EntitySet Name="rbschedules" EntityType="BusdbModel.rbschedule" />
+          <EntitySet Name="reserves" EntityType="BusdbModel.reserve" />
+          <EntitySet Name="routes" EntityType="BusdbModel.route" />
+          <AssociationSet Name="FK_rbschedule_bus" Association="BusdbModel.FK_rbschedule_bus">
+            <End Role="bus" EntitySet="buses" />
+            <End Role="rbschedule" EntitySet="rbschedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_passenger" Association="BusdbModel.FK_reserves_passenger">
+            <End Role="passenger" EntitySet="passengers" />
+            <End Role="reserve" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rbschedule_route" Association="BusdbModel.FK_rbschedule_route">
+            <End Role="route" EntitySet="routes" />
+            <End Role="rbschedule" EntitySet="rbschedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_rbschedule" Association="BusdbModel.FK_reserves_rbschedule">
+            <End Role="rbschedule" EntitySet="rbschedules" />
+            <End Role="reserve" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_reserves" Association="BusdbModel.FK_reserves_reserves">
+            <End Role="reserve" EntitySet="reserves" />
+            <End Role="reserve1" EntitySet="reserves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reserves_route" Association="BusdbModel.FK_reserves_route">
+            <End Role="route" EntitySet="routes" />
+            <End Role="reserve" EntitySet="reserves" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="bus">
+          <Key>
+            <PropertyRef Name="bid" />
+          </Key>
+          <Property Name="bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bname" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="max_seats" Type="Int32" Nullable="false" />
+          <Property Name="btype" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="rbschedules" Relationship="BusdbModel.FK_rbschedule_bus" FromRole="bus" ToRole="rbschedule" />
+        </EntityType>
+        <EntityType Name="passenger">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="phone_no" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="ptype" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="reserves" Relationship="BusdbModel.FK_reserves_passenger" FromRole="passenger" ToRole="reserve" />
+        </EntityType>
+        <EntityType Name="rbschedule">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rid" Type="Int32" Nullable="false" />
+          <Property Name="bid" Type="Int32" Nullable="false" />
+          <Property Name="fare" Type="Int32" Nullable="false" />
+          <Property Name="departure_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="departure_time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="bus" Relationship="BusdbModel.FK_rbschedule_bus" FromRole="rbschedule" ToRole="bus" />
+          <NavigationProperty Name="route" Relationship="BusdbModel.FK_rbschedule_route" FromRole="rbschedule" ToRole="route" />
+          <NavigationProperty Name="reserves" Relationship="BusdbModel.FK_reserves_rbschedule" FromRole="rbschedule" ToRole="reserve" />
+        </EntityType>
+        <EntityType Name="reserve">
+          <Key>
+            <PropertyRef Name="ticket_no" />
+          </Key>
+          <Property Name="ticket_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rid" Type="Int32" Nullable="false" />
+          <Property Name="pid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sid" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="seat_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="passenger" Relationship="BusdbModel.FK_reserves_passenger" FromRole="reserve" ToRole="passenger" />
+          <NavigationProperty Name="rbschedule" Relationship="BusdbModel.FK_reserves_rbschedule" FromRole="reserve" ToRole="rbschedule" />
+          <NavigationProperty Name="reserves1" Relationship="BusdbModel.FK_reserves_reserves" FromRole="reserve" ToRole="reserve1" />
+          <NavigationProperty Name="reserve1" Relationship="BusdbModel.FK_reserves_reserves" FromRole="reserve1" ToRole="reserve" />
+          <NavigationProperty Name="route" Relationship="BusdbModel.FK_reserves_route" FromRole="reserve" ToRole="route" />
+        </EntityType>
+        <EntityType Name="route">
+          <Key>
+            <PropertyRef Name="rid" />
+          </Key>
+          <Property Name="rid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="from_location" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="to_location" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="rbschedules" Relationship="BusdbModel.FK_rbschedule_route" FromRole="route" ToRole="rbschedule" />
+          <NavigationProperty Name="reserves" Relationship="BusdbModel.FK_reserves_route" FromRole="route" ToRole="reserve" />
+        </EntityType>
+        <Association Name="FK_rbschedule_bus">
+          <End Type="BusdbModel.bus" Role="bus" Multiplicity="1" />
+          <End Type="BusdbModel.rbschedule" Role="rbschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bus">
+              <PropertyRef Name="bid" />
+            </Principal>
+            <Dependent Role="rbschedule">
+              <PropertyRef Name="bid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_passenger">
+          <End Type="BusdbModel.passenger" Role="passenger" Multiplicity="1" />
+          <End Type="BusdbModel.reserve" Role="reserve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="passenger">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="reserve">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rbschedule_route">
+          <End Type="BusdbModel.route" Role="route" Multiplicity="1" />
+          <End Type="BusdbModel.rbschedule" Role="rbschedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="rbschedule">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_rbschedule">
+          <End Type="BusdbModel.rbschedule" Role="rbschedule" Multiplicity="1" />
+          <End Type="BusdbModel.reserve" Role="reserve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rbschedule">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="reserve">
+              <PropertyRef Name="sid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_reserves">
+          <End Type="BusdbModel.reserve" Role="reserve" Multiplicity="1" />
+          <End Type="BusdbModel.reserve" Role="reserve1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="reserve">
+              <PropertyRef Name="ticket_no" />
+            </Principal>
+            <Dependent Role="reserve1">
+              <PropertyRef Name="ticket_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reserves_route">
+          <End Type="BusdbModel.route" Role="route" Multiplicity="1" />
+          <End Type="BusdbModel.reserve" Role="reserve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="route">
+              <PropertyRef Name="rid" />
+            </Principal>
+            <Dependent Role="reserve">
+              <PropertyRef Name="rid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusdbModelStoreContainer" CdmEntityContainer="BusdbEntities">
+          <EntitySetMapping Name="buses">
+            <EntityTypeMapping TypeName="BusdbModel.bus">
+              <MappingFragment StoreEntitySet="bus">
+                <ScalarProperty Name="btype" ColumnName="btype" />
+                <ScalarProperty Name="max_seats" ColumnName="max_seats" />
+                <ScalarProperty Name="bname" ColumnName="bname" />
+                <ScalarProperty Name="bid" ColumnName="bid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="passengers">
+            <EntityTypeMapping TypeName="BusdbModel.passenger">
+              <MappingFragment StoreEntitySet="passenger">
+                <ScalarProperty Name="ptype" ColumnName="ptype" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rbschedules">
+            <EntityTypeMapping TypeName="BusdbModel.rbschedule">
+              <MappingFragment StoreEntitySet="rbschedule">
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="departure_date" ColumnName="departure_date" />
+                <ScalarProperty Name="fare" ColumnName="fare" />
+                <ScalarProperty Name="bid" ColumnName="bid" />
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reserves">
+            <EntityTypeMapping TypeName="BusdbModel.reserve">
+              <MappingFragment StoreEntitySet="reserves">
+                <ScalarProperty Name="seat_no" ColumnName="seat_no" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="rid" ColumnName="rid" />
+                <ScalarProperty Name="ticket_no" ColumnName="ticket_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="routes">
+            <EntityTypeMapping TypeName="BusdbModel.route">
+              <MappingFragment StoreEntitySet="route">
+                <ScalarProperty Name="to_location" ColumnName="to_location" />
+                <ScalarProperty Name="from_location" ColumnName="from_location" />
+                <ScalarProperty Name="rid" ColumnName="rid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

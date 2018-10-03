@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "ShowSeats";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Seats</h2>
+
+<div class="jumbotron text-center">
+    <div>
+        <form action="/Home/Reserve" method="post">
+            <div class="" style="background-color:darkseagreen">
+                <div class="row">
+                    <div class="col-sm-5 " style="border-right-style:dotted ">
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-6">
+                                <p style="border-style:solid">Driver</p>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-2 col-sm-offset-1 ">
+                                
+                                @for (int i = 0; i < 10; i++)
+                                {
+                                    int temp = 0;
+                                    if (ViewBag.BoockedSeats.Rows.Count != null)
+                                    {
+                                        for (int j = 0; j < ViewBag.BoockedSeats.Rows.Count; j++)
+                                        {
+                                            if (@ViewBag.BoockedSeats.Rows[j]["seat_no"].ToString() == i.ToString())
+                                            {
+                                                temp = 1;
+                                                <label class="container" style="color:red">@i <input type="button" name="radio" value="Booked"><span class="checkmark" disabled="true"></span></label>
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (temp == 0)
+                                    {
+                                        <label class="container" >@i <br> <input type="radio" name="radio" value="@i"><span class="checkmark"></span></label>
+                                    }
+                                        temp = 0;
+                                    
+                                }
+                                @*<label class="container">A1<input type="radio" name="radio" value="A1"><span class="checkmark"></span></label>
+                                <label class="container">B1<input type="radio" name="radio" value="B1"><span class="checkmark"></span></label>
+                                <label class="container">C1<input type="radio" name="radio" value="C1"><span class="checkmark"></span></label>
+                                <label class="container">D1<input type="radio" name="radio" value="D1"><span class="checkmark"></span></label>
+                                <label class="container">E1<input type="radio" name="radio" value="E1"><span class="checkmark"></span></label>
+                                <label class="container">F1<input type="radio" name="radio" value="F1"><span class="checkmark"></span></label>
+                                <label class="container">G1<input type="radio" name="radio" value="G1"><span class="checkmark"></span></label>
+                                <label class="container">H1<input type="radio" name="radio" value="H1"><span class="checkmark"></span></label>
+                                <label class="container">I1<input type="radio" name="radio" value="I1"><span class="checkmark"></span></label>
+                                <label class="container">J1<input type="radio" name="radio" value="J1"><span class="checkmark"></span></label>*@
+
+                            </div>
+                            <div class="col-sm-2">
+                                @for (int i = 10; i < 20; i++)
+                                {
+                                    int temp = 0;
+                                    if (ViewBag.BoockedSeats.Rows.Count > 0)
+                                    {
+                                        for (int j = 0; j < ViewBag.BoockedSeats.Rows.Count; j++)
+                                        {
+                                            if (@ViewBag.BoockedSeats.Rows[j]["seat_no"].ToString() == i.ToString())
+                                            {
+                                                temp = 1;
+                                                <label class="container" style="color:red">@i <input type="button" name="radio" value="boocked"><span class="checkmark" disabled="true"></span></label>
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (temp == 0)
+                                    {
+                                        <label class="container">@i <input type="radio" name="radio" value="@i"><span class="checkmark"></span></label>
+                                    }
+                                    temp = 0;
+
+                                }
+
+                                @*<label class="container">A2<input type="radio" name="radio" value="A2"><span class="checkmark"></span></label>
+                                <label class="container">B2<input type="radio" name="radio" value="B2"><span class="checkmark"></span></label>
+                                <label class="container">C2<input type="radio" name="radio" value="C2"><span class="checkmark"></span></label>
+                                <label class="container">D2<input type="radio" name="radio" value="D2"><span class="checkmark"></span></label>
+                                <label class="container">E2<input type="radio" name="radio" value="E2"><span class="checkmark"></span></label>
+                                <label class="container">F2<input type="radio" name="radio" value="F2"><span class="checkmark"></span></label>
+                                <label class="container">G2<input type="radio" name="radio" value="G2"><span class="checkmark"></span></label>
+                                <label class="container">H2<input type="radio" name="radio" value="H2"><span class="checkmark"></span></label>
+                                <label class="container">I2<input type="radio" name="radio" value="I2"><span class="checkmark"></span></label>
+                                <label class="container">J2<input type="radio" name="radio" value="J2"><span class="checkmark"></span></label>*@
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-2">
+                                @for (int i = 20; i < 30; i++)
+                                {
+                                    int temp = 0;
+                                    if (ViewBag.BoockedSeats.Rows.Count > 0)
+                                    {
+                                        for (int j = 0; j < ViewBag.BoockedSeats.Rows.Count; j++)
+                                        {
+                                            if (@ViewBag.BoockedSeats.Rows[j]["seat_no"].ToString() == i.ToString())
+                                            {
+                                                temp = 1;
+                                                <label class="container" style="color:red">@i <input type="button" name="radio" value="boocked"><span class="checkmark" disabled="true"></span></label>
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (temp == 0)
+                                    {
+                                        <label class="container">@i <input type="radio" name="radio" value="@i"><span class="checkmark"></span></label>
+                                    }
+                                    temp = 0;
+
+                                }
+
+                                @*<label class="container">A3<input type="radio" name="radio" value="A3"><span class="checkmark"></span></label>
+                                <label class="container">B3<input type="radio" name="radio" value="B3"><span class="checkmark"></span></label>
+                                <label class="container">C3<input type="radio" name="radio" value="C3"><span class="checkmark"></span></label>
+                                <label class="container">D3<input type="radio" name="radio" value="D3"><span class="checkmark"></span></label>
+                                <label class="container">E3<input type="radio" name="radio" value="E3"><span class="checkmark"></span></label>
+                                <label class="container">F3<input type="radio" name="radio" value="F3"><span class="checkmark"></span></label>
+                                <label class="container">G3<input type="radio" name="radio" value="G3"><span class="checkmark"></span></label>
+                                <label class="container">H3<input type="radio" name="radio" value="H3"><span class="checkmark"></span></label>
+                                <label class="container">I3<input type="radio" name="radio" value="I3"><span class="checkmark"></span></label>
+                                <label class="container">J3<input type="radio" name="radio" value="J3"><span class="checkmark"></span></label>*@
+
+                            </div>
+                            <div class="col-sm-2">
+                                @for (int i = 30; i < 40; i++)
+                                {
+                                    int temp = 0;
+                                    if (ViewBag.BoockedSeats.Rows.Count > 0)
+                                    {
+                                        for (int j = 0; j < ViewBag.BoockedSeats.Rows.Count; j++)
+                                        {
+                                            if (@ViewBag.BoockedSeats.Rows[j]["seat_no"].ToString() == i.ToString())
+                                            {
+                                                temp = 1;
+                                                <label class="container" style="color:red">@i <input type="button" name="radio" value="boocked"><span class="checkmark" disabled="true"></span></label>
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (temp == 0)
+                                    {
+                                        <label class="container">@i <input type="radio" name="radio" value="@i"><span class="checkmark"></span></label>
+                                    }
+                                    temp = 0;
+
+                                }
+
+                                @*<label class="container">A4<input type="radio" name="radio" value="A4"><span class="checkmark"></span></label>
+                                <label class="container">B4<input type="radio" name="radio" value="B4"><span class="checkmark"></span></label>
+                                <label class="container">C4<input type="radio" name="radio" value="C4"><span class="checkmark"></span></label>
+                                <label class="container">D4<input type="radio" name="radio" value="D4"><span class="checkmark"></span></label>
+                                <label class="container">E4<input type="radio" name="radio" value="E4"><span class="checkmark"></span></label>
+                                <label class="container">F4<input type="radio" name="radio" value="F4"><span class="checkmark"></span></label>
+                                <label class="container">G4<input type="radio" name="radio" value="G4"><span class="checkmark"></span></label>
+                                <label class="container">H4<input type="radio" name="radio" value="H4"><span class="checkmark"></span></label>
+                                <label class="container">I4<input type="radio" name="radio" value="I4"><span class="checkmark"></span></label>
+                                <label class="container">J4<input type="radio" name="radio" value="J4"><span class="checkmark"></span></label>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!-- for input personal information-->
+                    <div class="col-sm-4 col-sm-offset-1 ">
+
+                        <div class="form-group row">
+
+                            <div class="form-group">
+                                <label for="inputsm">Name :</label>
+                                <input class="form-control" name="name" id="txtName" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputsm">Phone no :</label>
+                                <input class="form-control" name="phone" id="txtPhone" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Gender</label>
+                                <select class="form-control" name="gender" id="gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputsm">Email :</label>
+                                <input class="form-control" name="email" id="txtEmail" type="text" required>
+                            </div>
+                            <button type="submit"  formaction="/Home/Reserve?sid=@ViewBag.sid.ToString()" class="btn btn-default">Confirm</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

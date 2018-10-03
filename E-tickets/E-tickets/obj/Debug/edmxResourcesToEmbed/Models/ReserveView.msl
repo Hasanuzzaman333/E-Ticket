@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReservesViewStoreContainer" CdmEntityContainer="ReserveView">
+    <EntitySetMapping Name="buses">
+      <EntityTypeMapping TypeName="ReservesView.bus">
+        <MappingFragment StoreEntitySet="bus">
+          <ScalarProperty Name="bid" ColumnName="bid" />
+          <ScalarProperty Name="bname" ColumnName="bname" />
+          <ScalarProperty Name="max_seats" ColumnName="max_seats" />
+          <ScalarProperty Name="btype" ColumnName="btype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="passengers">
+      <EntityTypeMapping TypeName="ReservesView.passenger">
+        <MappingFragment StoreEntitySet="passenger">
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="ptype" ColumnName="ptype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rbschedules">
+      <EntityTypeMapping TypeName="ReservesView.rbschedule">
+        <MappingFragment StoreEntitySet="rbschedule">
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="bid" ColumnName="bid" />
+          <ScalarProperty Name="fare" ColumnName="fare" />
+          <ScalarProperty Name="departure_date" ColumnName="departure_date" />
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reserves">
+      <EntityTypeMapping TypeName="ReservesView.reserve">
+        <MappingFragment StoreEntitySet="reserves">
+          <ScalarProperty Name="ticket_no" ColumnName="ticket_no" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="seat_no" ColumnName="seat_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="routes">
+      <EntityTypeMapping TypeName="ReservesView.route">
+        <MappingFragment StoreEntitySet="route">
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="from_location" ColumnName="from_location" />
+          <ScalarProperty Name="to_location" ColumnName="to_location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,43 @@
+﻿@model E_tickets.Models.RouteM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RouteM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Routeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Routeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToLocation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

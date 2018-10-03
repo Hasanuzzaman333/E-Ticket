@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="passenger">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="phone_no" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="email" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="ptype" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rbschedule">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rid" Type="int" Nullable="false" />
+    <Property Name="bid" Type="int" />
+    <Property Name="fare" Type="int" Nullable="false" />
+    <Property Name="departure_date" Type="date" Nullable="false" />
+    <Property Name="departure_time" Type="time" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reserves">
+    <Key>
+      <PropertyRef Name="ticket_no" />
+    </Key>
+    <Property Name="ticket_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rid" Type="int" Nullable="false" />
+    <Property Name="pid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="seat_no" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="route">
+    <Key>
+      <PropertyRef Name="rid" />
+    </Key>
+    <Property Name="rid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="from_location" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="to_location" Type="char" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_rbschedule_route">
+    <End Role="route" Type="Self.route" Multiplicity="1" />
+    <End Role="rbschedule" Type="Self.rbschedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="route">
+        <PropertyRef Name="rid" />
+      </Principal>
+      <Dependent Role="rbschedule">
+        <PropertyRef Name="rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reserves_passenger">
+    <End Role="passenger" Type="Self.passenger" Multiplicity="1" />
+    <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="passenger">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="reserves">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reserves_rbschedule">
+    <End Role="rbschedule" Type="Self.rbschedule" Multiplicity="1" />
+    <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rbschedule">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="reserves">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reserves_reserves">
+    <End Role="reserves" Type="Self.reserves" Multiplicity="1" />
+    <End Role="reserves1" Type="Self.reserves" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="reserves">
+        <PropertyRef Name="ticket_no" />
+      </Principal>
+      <Dependent Role="reserves1">
+        <PropertyRef Name="ticket_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reserves_route">
+    <End Role="route" Type="Self.route" Multiplicity="1" />
+    <End Role="reserves" Type="Self.reserves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="route">
+        <PropertyRef Name="rid" />
+      </Principal>
+      <Dependent Role="reserves">
+        <PropertyRef Name="rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RMModelStoreContainer">
+    <EntitySet Name="passenger" EntityType="Self.passenger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rbschedule" EntityType="Self.rbschedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reserves" EntityType="Self.reserves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="route" EntityType="Self.route" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_rbschedule_route" Association="Self.FK_rbschedule_route">
+      <End Role="route" EntitySet="route" />
+      <End Role="rbschedule" EntitySet="rbschedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reserves_passenger" Association="Self.FK_reserves_passenger">
+      <End Role="passenger" EntitySet="passenger" />
+      <End Role="reserves" EntitySet="reserves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reserves_rbschedule" Association="Self.FK_reserves_rbschedule">
+      <End Role="rbschedule" EntitySet="rbschedule" />
+      <End Role="reserves" EntitySet="reserves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reserves_reserves" Association="Self.FK_reserves_reserves">
+      <End Role="reserves" EntitySet="reserves" />
+      <End Role="reserves1" EntitySet="reserves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reserves_route" Association="Self.FK_reserves_route">
+      <End Role="route" EntitySet="route" />
+      <End Role="reserves" EntitySet="reserves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

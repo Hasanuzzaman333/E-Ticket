@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="reserves">
+    <Key>
+      <PropertyRef Name="ticket_no" />
+    </Key>
+    <Property Name="ticket_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rid" Type="int" Nullable="false" />
+    <Property Name="pid" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="seat_no" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_reserves_reserves">
+    <End Role="reserves" Type="Self.reserves" Multiplicity="1" />
+    <End Role="reserves1" Type="Self.reserves" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="reserves">
+        <PropertyRef Name="ticket_no" />
+      </Principal>
+      <Dependent Role="reserves1">
+        <PropertyRef Name="ticket_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusModelStoreContainer">
+    <EntitySet Name="reserves" EntityType="Self.reserves" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_reserves_reserves" Association="Self.FK_reserves_reserves">
+      <End Role="reserves" EntitySet="reserves" />
+      <End Role="reserves1" EntitySet="reserves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

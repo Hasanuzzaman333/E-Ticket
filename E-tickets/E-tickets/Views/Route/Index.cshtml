@@ -1,0 +1,46 @@
+﻿@model IEnumerable<E_tickets.Models.RouteM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Routeid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToLocation)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Routeid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToLocation)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.Routeid  }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.Routeid  }) |
+            <!--Html.ActionLink("Delete", "Delete", new {  id=item.Routeid  })-->
+        </td>
+    </tr>
+}
+
+</table>

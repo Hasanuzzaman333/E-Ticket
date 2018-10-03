@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BusdbModelStoreContainer" CdmEntityContainer="BusdbEntities">
+    <EntitySetMapping Name="buses">
+      <EntityTypeMapping TypeName="BusdbModel.bus">
+        <MappingFragment StoreEntitySet="bus">
+          <ScalarProperty Name="btype" ColumnName="btype" />
+          <ScalarProperty Name="max_seats" ColumnName="max_seats" />
+          <ScalarProperty Name="bname" ColumnName="bname" />
+          <ScalarProperty Name="bid" ColumnName="bid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="passengers">
+      <EntityTypeMapping TypeName="BusdbModel.passenger">
+        <MappingFragment StoreEntitySet="passenger">
+          <ScalarProperty Name="ptype" ColumnName="ptype" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rbschedules">
+      <EntityTypeMapping TypeName="BusdbModel.rbschedule">
+        <MappingFragment StoreEntitySet="rbschedule">
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+          <ScalarProperty Name="departure_date" ColumnName="departure_date" />
+          <ScalarProperty Name="fare" ColumnName="fare" />
+          <ScalarProperty Name="bid" ColumnName="bid" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reserves">
+      <EntityTypeMapping TypeName="BusdbModel.reserve">
+        <MappingFragment StoreEntitySet="reserves">
+          <ScalarProperty Name="seat_no" ColumnName="seat_no" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+          <ScalarProperty Name="ticket_no" ColumnName="ticket_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="routes">
+      <EntityTypeMapping TypeName="BusdbModel.route">
+        <MappingFragment StoreEntitySet="route">
+          <ScalarProperty Name="to_location" ColumnName="to_location" />
+          <ScalarProperty Name="from_location" ColumnName="from_location" />
+          <ScalarProperty Name="rid" ColumnName="rid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

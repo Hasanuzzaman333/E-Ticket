@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-t-85 p-b-20">
+                <form class="login100-form validate-form">
+                    <h2>Signup</h2>
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter name">
+                        <input class="input100" id="txtName" type="text" name="name">
+                        <span class="focus-input100" data-placeholder="Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter phone no.">
+                        <input class="input100" id="txtPhone" type="text" name="Phone">
+                        <span class="focus-input100" data-placeholder="Phone no"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter email">
+                        <input class="input100" id="txtEmail" type="text" name="email">
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-50" data-validate="password">
+                        <input class="input100" id="txtPassword" type="password" name="password">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-50" data-validate="Re-Enter password">
+                        <input class="input100" id="txtRepassword" type="password" name="repassword">
+                        <span class="focus-input100" data-placeholder="Re-Enter password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" id="btnSignup">
+                            Register
+                        </button>
+                    </div>
+
+                    <ul class="login-more p-t-190">
+                        <li class="m-b-8">
+                            <span class="txt1">
+                                Forgot
+                            </span>
+
+                            <a href="#" class="txt2">
+                                Username / Password?
+                            </a>
+                        </li>
+
+                        <li>
+                            <span class="txt1">
+                                Don’t have an account?
+                            </span>
+
+                            <a href="#" class="txt2">
+                                Sign up
+                            </a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/scripts/main.js"></script>
+
+    <script type="text/javascript">
+            $(function () {
+                $("#btnSignup").click(function () {
+
+                    if ($("#txtPassword").val() != $("#txtRepassword").val()) {
+                        alert("Password not matched!");
+                    }
+                    else {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Signup/SignupUser",
+                            data: '{email: "' + $("#txtEmail").val() + '" ,password:"' + $("#txtPassword").val() + '", name: "' + $("#txtName").val() + '", phone: "' + $("#txtPhone").val() + '"}',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+
+                            success: function (response) {
+                                if (response.success) {
+                                    alert("Success!");
+                                    window.location.href = "/Home/Index";
+                                }
+                                else {
+                                    alert("Login Failed!");
+                                }
+                            },
+                            failure: function (response) {
+                                alert("Failed");
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    }
+                });
+            });
+    </script>
+
+
+</body>
+</html>
+

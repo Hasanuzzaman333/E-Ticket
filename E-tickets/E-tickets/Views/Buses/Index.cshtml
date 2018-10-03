@@ -1,0 +1,52 @@
+﻿@model IEnumerable<E_tickets.Models.Buses>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Busid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxSeat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Busid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxSeat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Busid  }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.Busid  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.Busid  })
+        </td>
+    </tr>
+}
+
+</table>
